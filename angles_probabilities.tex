@@ -1,6 +1,9 @@
 \documentclass[12pt]{article} % размер шрифта
 
-\usepackage{tikz} % картинки в tikz
+
+\usepackage{tikz,tikz-3dplot} % картинки в tikz
+\usepackage{tkz-euclide}
+
 \usepackage{microtype} % свешивание пунктуации
 
 \usepackage{array} % для столбцов фиксированной ширины
@@ -139,9 +142,23 @@ style=alphabetic]{biblatex}
 
 Начнём с необычного вероятностного доказательства формулы для суммы углов треугольника. 
 
-Рассмотрим закрашенный треугольник $\Delta ABC$ на плоскости. 
+Рассмотрим закрашенный треугольник на плоскости. 
 
 % картинка
+\begin{minipage}{0.99\textwidth}
+\begin{center}
+\begin{tikzpicture}
+\tkzDefPoint(0,0){A}
+\tkzDefPoint(4,0){B}
+\tkzDefPoint(3,2){C}
+\tkzDrawPoints(A,B,C)
+\tkzDrawPolygon[fill=blue!10](A,B,C)
+% \tkzLabelPoints[below](A,B)
+% \tkzLabelPoints[above right](C)
+\end{tikzpicture}
+\end{center}
+\end{minipage}
+
 
 Для любой точки плоскости $x$ определим величину $\alpha(x)$. 
 Величина $\alpha(x)$ показывает, какой процент территории неподалёку от точки $x$ попадает в треугольник. 
@@ -152,10 +169,44 @@ style=alphabetic]{biblatex}
 И величина $\alpha(x)$ равна доле площади пересечения маленькой $\varepsilon$-окрестности 
 с треугольником от общей площади окрестности. 
 
-% картинка
+
+\begin{minipage}{0.99\textwidth}
+\begin{center}
+\begin{tikzpicture}
+\tkzDefPoint(0,0){x}
+\tkzDefPoint(4,0){y}
+\tkzDefPoint(3,2){c}
+\tkzDefPoint(2.5,1){a}
+\tkzDefPoint(2,0){b}
+\tkzDefPoint(1,1.5){d}
+\tkzDrawPolygon[fill=blue!10](x,y,c)
+% \tkzLabelPoints[below](A,B)
+% \tkzLabelPoints[above right](C)
+%\tkzLabelPoints[below](A){$xxx$}
+% \tkzLabelPoint[left](x)
+% \tkzLabelPoint[right](y)
+%\tkzLabelPoint[below](b)
+%\tkzLabelPoint[below](d)
+\tkzFillAngle[size = 0.2cm, fill = red!30](x,c,y)
+\tkzMarkAngle[arc = l, mark = none, size = 0.2cm](x,c,y)
+\tkzFillAngle[size=0.2cm, fill=red!30](y,b,x)
+\tkzMarkAngle[arc = l, mark = none, size = 0.2cm](y,b,x)
+\tkzDrawCircle[R, fill=red!30](a, 0.2 cm)
+\tkzDrawCircle[R, fill=red!30](d, 0.2 cm)
+% \tkzFillAngle[size=0.3cm, fill=red!30](y,d,y)
+\tkzLabelAngle[pos=0.5](x,c,y){$\gamma_c$}
+\tkzDrawPoints(x, y, a, b, c, d)
+\tkzLabelPoint[above right](c){$c$}
+\tkzLabelPoint[below=0.15cm](a){$a$}
+\tkzLabelPoint[below](b){$b$}
+\tkzLabelPoint[below=0.15cm](d){$d$}
+\end{tikzpicture}
+\end{center}
+\end{minipage}
+  
 
 
-Точка $a$ лежит строго внутри треугольника $\Delta ABC$, 
+Точка $a$ лежит строго внутри треугольника, 
 и для неё доля $\alpha(a)$ равна $1$.
 
 Точка $b$ лежит на стороне треугольника, но не совпадает ни с одной вершиной, 
